@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clonar repositório de teste das APIs Serverest') {
+            steps {
+                git branch: 'main', url: 'https://github.com/VinniSousa/testes-api-cy.git'
+            }
+        }
+        stage('Instalar dependências do projeto (Com base no sistema Windows)') {
+            steps {
+                bat 'npm install'
+            }
+        }
+        stage('Executar testes do projeto (Com base no sistema Windows)') {
+            steps {
+                bat 'npm run cy:run'
+            }
+        }
+    }
+}
